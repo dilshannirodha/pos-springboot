@@ -18,28 +18,25 @@ public class CustomerServiceIMPL implements CustomerService {
     @Override
     public String addCustomer(CustomerSaveRequestDTO customerSaveRequestDTO) {
         Customer customer = new Customer(
-                1,
+
                 customerSaveRequestDTO.getCustomerName(),
                 customerSaveRequestDTO.getCustomerAddress(),
                 customerSaveRequestDTO.getCustomerSalary(),
                 customerSaveRequestDTO.getContactNumbers(),
-                customerSaveRequestDTO.getNic(),
-                true
+                customerSaveRequestDTO.getNic()
 
         );
 
-        if (customerRepo.existsById(customer.getCustomerId())) {
-            customerRepo.save(customer);
-            return customer.getCustomerName() + "saved";
-        } else
-        {
-            System.out.println();
-            return "customerid already exist";
+        customer.setActiveState(true);
+        if (customerRepo.existsByNic(customer.getNic())) {
+            return "NIC already exists!";
         }
+
+        customerRepo.save(customer);
+        return customer.getCustomerName() + " saved";
 
 
     }
-
     @Override
     public String updateCustomer(CustomerUpdateRequestDTO customerUpdateRequestDTO) {
         if(customerRepo.existsById(customerUpdateRequestDTO.getCustomerId())){

@@ -1,5 +1,6 @@
 package com.pos.project.point_of_sale.controller;
 
+import com.pos.project.point_of_sale.dto.CustomerDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerSaveRequestDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerUpdateRequestDTO;
 import com.pos.project.point_of_sale.service.CustomerService;
@@ -28,7 +29,15 @@ public class TestController {
     @PutMapping(path = "/update")
     public String updateCustomer(@RequestBody CustomerUpdateRequestDTO customerUpdateRequestDTO){
        String updated = customerService.updateCustomer(customerUpdateRequestDTO);
-        return "";
+        return updated;
+    }
+
+    @GetMapping(
+            path = {"/get-all-customer"},
+            params = {"id"})
+    public CustomerDTO getAllCustomers(@RequestParam(value = "id") String id){
+    CustomerDTO customerDTO = customerService.getCustomerById(id);
+    return  customerDTO;
     }
 
 }

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @EnableJpaRepositories
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
-
+    boolean existsByNic(String nic);
 }

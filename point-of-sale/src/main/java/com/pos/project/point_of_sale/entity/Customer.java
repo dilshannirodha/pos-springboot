@@ -44,6 +44,16 @@ public class Customer {
         this.activeState = activeState;
     }
 
+    public Customer(String customerName, String customerAddress, double customerSalary, int contactNumbers, String nic) {
+
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.customerSalary = customerSalary;
+        this.contactNumbers = contactNumbers;
+        this.nic = nic;
+    }
+
+
 
     public int getCustomerId() {
         return customerId;
