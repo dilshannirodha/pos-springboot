@@ -4,8 +4,9 @@ import com.pos.project.point_of_sale.config.CustomerMapper;
 import com.pos.project.point_of_sale.dto.CustomerDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerSaveRequestDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerUpdateRequestDTO;
+import com.pos.project.point_of_sale.dto.response.ResponseActiveStateCustomerDTO;
 import com.pos.project.point_of_sale.entity.Customer;
-import com.pos.project.point_of_sale.respository.CustomerRepo;
+import com.pos.project.point_of_sale.repository.CustomerRepo;
 import com.pos.project.point_of_sale.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -164,8 +165,16 @@ public class CustomerServiceIMPL implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomerNamesByActiveState() {
-        return null;
+    public List<ResponseActiveStateCustomerDTO> getAllCustomerNamesByActiveState() throws ChangeSetPersister.NotFoundException {
+        List<Customer> customers = customerRepo.findAllByActiveStateEquals(true);
+        if(customers.size() !=0){
+
+            List<ResponseActiveStateCustomerDTO> customerDTOs = customerMapper.entityListToDtoListOnlyName(customers);
+            return customerDTOs;
+        }
+        else{
+            throw new ChangeSetPersister.NotFoundException();
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.pos.project.point_of_sale.respository;
+package com.pos.project.point_of_sale.repository;
 
 
 import com.pos.project.point_of_sale.entity.Customer;

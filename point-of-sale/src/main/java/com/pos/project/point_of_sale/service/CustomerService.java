@@ -3,6 +3,7 @@ package com.pos.project.point_of_sale.service;
 import com.pos.project.point_of_sale.dto.CustomerDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerSaveRequestDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerUpdateRequestDTO;
+import com.pos.project.point_of_sale.dto.response.ResponseActiveStateCustomerDTO;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
@@ -22,5 +23,6 @@ public interface CustomerService {
 
      List<CustomerDTO> getAllCustomersByActiveState() throws ChangeSetPersister.NotFoundException;
 
-     List<CustomerDTO> getAllCustomerNamesByActiveState();
+
+     List<ResponseActiveStateCustomerDTO> getAllCustomerNamesByActiveState() throws ChangeSetPersister.NotFoundException;
 }
