@@ -2,6 +2,7 @@ package com.pos.project.point_of_sale.service.impl;
 
 import com.pos.project.point_of_sale.config.ItemMapper;
 import com.pos.project.point_of_sale.dto.ItemDTO;
+import com.pos.project.point_of_sale.dto.paginated.PaginatedResponseItemDTO;
 import com.pos.project.point_of_sale.dto.request.ItemSaveRequestDTO;
 import com.pos.project.point_of_sale.entity.Item;
 import com.pos.project.point_of_sale.repository.ItemRepository;
@@ -9,6 +10,8 @@ import com.pos.project.point_of_sale.service.ItemService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,7 +58,31 @@ public class ItemServiceIMPL  implements ItemService {
         return itemDTOs;
     }
 
+    @Override
+    public int countAllItems() {
+        int count = itemRepository.countAllByActiveStateEquals(true);
+        return count;
+    }
 
+    @Override
+    public PaginatedResponseItemDTO getAllItemsPaginated(int page, int size) {
+       Page<Item> getAllItemsByPaginated = itemRepository.findAll(PageRequest.of(page,size));
+
+       return new PaginatedResponseItemDTO(
+               itemMapper.pageToList(getAllItemsByPaginated),
+               itemRepository.count()
+       );
+    }
+
+    @Override
+    public PaginatedResponseItemDTO getAllActiveItemsPaginated(int page, int size, boolean activeState) {
+        Page<Item> getAllActiveItemsByPaginated = itemRepository.findAllByActiveStateEquals(activeState,PageRequest.of(page,size));
+
+        return new PaginatedResponseItemDTO(
+                itemMapper.pageToList(getAllActiveItemsByPaginated),
+                itemRepository.countAllByActiveStateEquals(activeState)
+        );
+    }
 
 
 }

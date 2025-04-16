@@ -1,9 +1,8 @@
 package com.pos.project.point_of_sale.controller;
 
-import com.pos.project.point_of_sale.dto.CustomerDTO;
 import com.pos.project.point_of_sale.dto.ItemDTO;
+import com.pos.project.point_of_sale.dto.paginated.PaginatedResponseItemDTO;
 import com.pos.project.point_of_sale.dto.request.ItemSaveRequestDTO;
-import com.pos.project.point_of_sale.entity.Item;
 import com.pos.project.point_of_sale.service.ItemService;
 import com.pos.project.point_of_sale.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
 import java.util.List;
 
 @RestController
@@ -50,4 +50,35 @@ public class ItemController {
         return null;
 
     }
+
+    @GetMapping( path = {"/get-active-items-count"})
+    public ResponseEntity<StandardResponse> getAllActiveItemCount(){
+        int itemCount =  itemService.countAllItems();
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "success", itemCount),
+                HttpStatus.OK);
+    }
+
+    @GetMapping( path = {"/get-all-items-paginated"},params = {"page","size"})
+    public ResponseEntity<StandardResponse> getAllItemsPaginated(
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") @Max(50) int size){
+
+        PaginatedResponseItemDTO paginatedResponseItemDTO = itemService.getAllItemsPaginated(page, size);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "success", paginatedResponseItemDTO),
+                HttpStatus.OK);    }
+
+    @GetMapping( path = {"/get-all-active-items-paginated"},
+     params = {"page","size","activeState"})
+    public ResponseEntity<StandardResponse> getAllActiveItemsPaginated(
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size") @Max(50) int size,
+            @RequestParam(value = "activeState") boolean activeState){
+
+        PaginatedResponseItemDTO paginatedResponseItemDTO = itemService.getAllActiveItemsPaginated(page,size,activeState);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "success", paginatedResponseItemDTO),
+                HttpStatus.OK);    }
+
 }

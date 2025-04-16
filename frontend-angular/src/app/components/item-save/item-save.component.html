@@ -1,0 +1,50 @@
+<div class="p-6 max-w-xl mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Add New Item</h2>
+  
+    <form (ngSubmit)="saveItem()" #itemForm="ngForm" class="space-y-4">
+      <div>
+        <label class="block font-medium mb-1">Item Name</label>
+        <input type="text" [(ngModel)]="item.itemName" name="itemName" class="w-full border px-3 py-2 rounded" required />
+      </div>
+  
+      <div>
+        <label class="block font-medium mb-1">Measuring Unit</label>
+        <select [(ngModel)]="item.measuringUnit" name="measuringUnit" class="w-full border px-3 py-2 rounded" required>
+          <option value="">Select Unit</option>
+          <option value="KILO_GRAM">Kilogram</option>
+          <option value="GRAM">Gram</option>
+          <option value="LITER">Liter</option>
+          <option value="MILLI_LITER">Milliliter</option>
+          <option value="NUMBER">Number</option>
+        </select>
+      </div>
+  
+      <div>
+        <label class="block font-medium mb-1">Balance Quantity</label>
+        <input type="number" [(ngModel)]="item.balanceQty" name="balanceQty" class="w-full border px-3 py-2 rounded" required />
+      </div>
+  
+      <div>
+        <label class="block font-medium mb-1">Supplier Price</label>
+        <input type="number" [(ngModel)]="item.supplierPrice" name="supplierPrice" class="w-full border px-3 py-2 rounded" required />
+      </div>
+  
+      <div>
+        <label class="block font-medium mb-1">Selling Price</label>
+        <input type="number" [(ngModel)]="item.sellingPrice" name="sellingPrice" class="w-full border px-3 py-2 rounded" required />
+      </div>
+  
+      <div class="flex items-center">
+        <input type="checkbox" [(ngModel)]="item.activeState" name="activeState" class="mr-2" />
+        <label class="font-medium">Is Active?</label>
+      </div>
+  
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Save Item
+      </button>
+    </form>
+  
+    <p *ngIf="successMessage" class="text-green-600 mt-4">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="text-red-600 mt-4">{{ errorMessage }}</p>
+  </div>
+  
