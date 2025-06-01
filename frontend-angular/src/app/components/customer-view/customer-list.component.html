@@ -1,0 +1,52 @@
+<div class="p-6 max-w-5xl mx-auto">
+
+    <button 
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+      [routerLink]="['/add-customer']"
+    >
+      + Add Customer
+    </button>
+  <h1 class="text-2xl font-bold mb-6">Customer List</h1>
+
+  <div *ngIf="isLoading" class="text-gray-600 mb-4">Loading customers...</div>
+  <div *ngIf="error" class="text-red-600 mb-4">{{ error }}</div>
+
+  <table *ngIf="!isLoading && customers.length > 0" class="min-w-full bg-white shadow-md rounded-xl overflow-hidden">
+    <thead class="bg-gray-100 border-b border-gray-300">
+      <tr>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">ID</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Address</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Salary</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Contact</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">NIC</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Active</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers" class="hover:bg-gray-50">
+        <td class="px-6 py-4 text-sm text-gray-900">{{ customer.customerId }}</td>
+        <td class="px-6 py-4 text-sm text-gray-900">{{ customer.customerName }}</td>
+        <td class="px-6 py-4 text-sm text-gray-900">{{ customer.customerAddress }}</td>
+        <td class="px-6 py-4 text-sm text-gray-900">Rs. {{ customer.customerSalary | number:'1.2-2' }}</td>
+        <td class="px-6 py-4 text-sm text-gray-900">{{ customer.contactNumbers }}</td>
+        <td class="px-6 py-4 text-sm text-gray-900">{{ customer.nic }}</td>
+        <td class="px-6 py-4 text-sm font-medium" [ngClass]="customer.activeState ? 'text-green-600' : 'text-red-600'">
+          {{ customer.activeState ? 'Yes' : 'No' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && customers.length === 0" class="text-gray-500 mt-4">
+    No customers found.
+  </div>
+  <div class="mt-4">
+    <a
+      [routerLink]="['/view-customer']"
+      class="block text-center bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600"
+    >
+      Back 
+    </a>
+  </div>
+</div>

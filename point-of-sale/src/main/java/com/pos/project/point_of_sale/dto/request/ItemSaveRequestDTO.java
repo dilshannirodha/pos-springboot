@@ -1,6 +1,5 @@
 package com.pos.project.point_of_sale.dto.request;
 
-import com.pos.project.point_of_sale.entity.enums.MeasuringUnit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

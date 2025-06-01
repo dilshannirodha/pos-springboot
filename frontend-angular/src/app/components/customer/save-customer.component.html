@@ -1,0 +1,79 @@
+<div class="p-6 max-w-xl mx-auto bg-white shadow-md rounded-xl">
+  <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Add New Customer</h2>
+
+  <form (ngSubmit)="saveCustomer()" #customerForm="ngForm" class="space-y-5">
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Customer Name</label>
+      <input
+        type="text"
+        name="customerName"
+        [(ngModel)]="customer.customerName"
+        class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-blue-500 focus:outline-none"
+        required
+      />
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Customer Address</label>
+      <input
+        type="text"
+        name="customerAddress"
+        [(ngModel)]="customer.customerAddress"
+        class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-blue-500 focus:outline-none"
+        required
+      />
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Customer Salary</label>
+      <input
+        type="number"
+        name="customerSalary"
+        [(ngModel)]="customer.customerSalary"
+        class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-blue-500 focus:outline-none"
+        required
+      />
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Contact Number</label>
+      <input
+        type="number"
+        name="contactNumbers"
+        [(ngModel)]="customer.contactNumbers"
+        class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-blue-500 focus:outline-none"
+        required
+      />
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">NIC</label>
+      <input
+        type="text"
+        name="nic"
+        [(ngModel)]="customer.nic"
+        class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-blue-500 focus:outline-none"
+        required
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Save Customer
+    </button>
+  </form>
+
+  <div class="mt-4">
+    <a
+      [routerLink]="['/']"
+      class="block text-center bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600"
+    >
+      Back to Customer List
+    </a>
+  </div>
+
+  <p *ngIf="successMessage" class="text-green-600 mt-4 text-center font-medium">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="text-red-600 mt-4 text-center font-medium">{{ errorMessage }}</p>
+</div>

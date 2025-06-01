@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemService } from '../../services/item.service';
 import { Item, MeasuringUnit } from '../../models/item.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-item-list',
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule,RouterModule],
   templateUrl: './item-list.component.html',
 })
 export class ItemListComponent implements OnInit {

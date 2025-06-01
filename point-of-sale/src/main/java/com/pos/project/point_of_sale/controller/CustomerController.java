@@ -5,7 +5,6 @@ import com.pos.project.point_of_sale.dto.request.CustomerSaveRequestDTO;
 import com.pos.project.point_of_sale.dto.request.CustomerUpdateRequestDTO;
 import com.pos.project.point_of_sale.dto.response.ResponseActiveStateCustomerDTO;
 import com.pos.project.point_of_sale.service.CustomerService;
-import com.pos.project.point_of_sale.service.impl.CustomerServiceIMPL;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
